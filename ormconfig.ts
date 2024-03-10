@@ -1,3 +1,4 @@
+import { Category } from 'src/entities/category.entity';
 import { Course } from 'src/entities/course.entity';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
@@ -8,7 +9,7 @@ const config: PostgresConnectionOptions = {
   port: 5432,
   username: 'postgres',
   password: 'postgres',
-  entities: [Course],
+  entities: [Course, Category],
   synchronize: true,
 };
 

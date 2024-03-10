@@ -53,4 +53,11 @@ export class CoursesService {
     }
     await this.courseRepository.remove(courseToDelete);
   }
+
+  async findwithCategory() {
+    return await this.courseRepository
+      .createQueryBuilder('course')
+      .leftJoinAndSelect('course.category', 'category')
+      .getMany();
+  }
 }

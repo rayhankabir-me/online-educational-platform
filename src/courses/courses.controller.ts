@@ -22,6 +22,11 @@ export class CoursesController {
     return this.coursesService.findAll();
   }
 
+  @Get('withcategories')
+  findwithCategory() {
+    return this.coursesService.findwithCategory();
+  }
+
   @Post('create')
   create(@Body(ValidationPipe) createCourseDto: CreateCourseDto) {
     return this.coursesService.create(createCourseDto);

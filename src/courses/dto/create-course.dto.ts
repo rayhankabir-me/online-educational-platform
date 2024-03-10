@@ -23,4 +23,7 @@ export class CreateCourseDto {
   @IsNotEmpty()
   @IsInt()
   created_by: number;
+
+  @IsNotEmpty()
+  categoryId: number;
 }
