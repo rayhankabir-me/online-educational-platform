@@ -81,9 +81,17 @@ export class CoursesService {
   }
 
   async findwithCategory() {
-    return await this.courseRepository
-      .createQueryBuilder('course')
-      .leftJoinAndSelect('course.category', 'category')
-      .getMany();
+    //method 1
+    return await this.courseRepository.find({
+      relations: {
+        category: true,
+      },
+    });
+
+    //method 2 - query builder (working)
+    //   return await this.courseRepository
+    //     .createQueryBuilder('course')
+    //     .leftJoinAndSelect('course.category', 'category')
+    //     .getMany();
   }
 }
