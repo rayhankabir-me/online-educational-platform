@@ -25,5 +25,5 @@ export class CreateCourseDto {
   created_by: number;
 
   @IsNotEmpty()
-  categoryId: number;
+  categoryId: any;
 }

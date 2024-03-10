@@ -15,6 +15,8 @@ export class Category {
   @Column()
   image_url: string;
 
-  @OneToMany(() => Course, (course) => course.category)
+  @OneToMany(() => Course, (course) => course.category, {
+    cascade: true,
+  })
   courses: Course[];
 }

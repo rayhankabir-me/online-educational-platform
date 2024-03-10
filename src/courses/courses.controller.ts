@@ -9,13 +9,20 @@ import {
   Post,
   ValidationPipe,
 } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Course } from 'src/entities/course.entity';
+import { Repository } from 'typeorm';
 import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 
 @Controller('courses')
 export class CoursesController {
-  constructor(private readonly coursesService: CoursesService) {}
+  constructor(
+    @InjectRepository(Course)
+    private readonly courseRepository: Repository<Course>,
+    private readonly coursesService: CoursesService,
+  ) {}
 
   @Get()
   findAll() {
@@ -28,8 +35,19 @@ export class CoursesController {
   }
 
   @Post('create')
-  create(@Body(ValidationPipe) createCourseDto: CreateCourseDto) {
+  async create(@Body(ValidationPipe) createCourseDto: CreateCourseDto) {
     return this.coursesService.create(createCourseDto);
+
+    // const course = new Course();
+    // course.title = createCourseDto.title;
+    // course.description = createCourseDto.description;
+    // course.rating = createCourseDto.rating;
+    // course.created_at = createCourseDto.created_at;
+    // course.updated_at = createCourseDto.updated_at;
+    // course.created_by = createCourseDto.created_by;
+    // course.category = createCourseDto.categoryId;
+
+    // return await this.courseRepository.save(course);
   }
 
   @Get(':id')
