@@ -1,8 +1,14 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
+
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -30,5 +36,16 @@ export class AuthService {
 
     const user = this.userRepository.create({ username, email, password });
     return await this.userRepository.save(user);
+  }
+
+  async loginUser(createUserDto: CreateUserDto) {
+    const { username, password } = createUserDto;
+
+    const user = await this.userRepository.findOneBy({ username: username });
+    if (user && (await bcrypt.compare(password, (await user).password))) {
+      return 'login success';
+    } else {
+      throw new UnauthorizedException('Invalid login credentials!');
+    }
   }
 }

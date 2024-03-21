@@ -10,4 +10,9 @@ export class AuthController {
   register(@Body(ValidationPipe) createUserDto: CreateUserDto) {
     return this.authService.createUser(createUserDto);
   }
+
+  @Post('login')
+  login(@Body() createUserDto: CreateUserDto) {
+    return this.authService.loginUser(createUserDto);
+  }
 }
