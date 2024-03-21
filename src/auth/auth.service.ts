@@ -8,6 +8,7 @@ import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 
+import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -15,6 +16,7 @@ export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private jwtService: JwtService,
   ) {}
 
   async createUser(createUserDto: CreateUserDto) {
@@ -43,7 +45,10 @@ export class AuthService {
 
     const user = await this.userRepository.findOneBy({ username: username });
     if (user && (await bcrypt.compare(password, (await user).password))) {
-      return 'login success';
+      const payload = { username };
+      return {
+        access_token: await this.jwtService.sign(payload),
+      };
     } else {
       throw new UnauthorizedException('Invalid login credentials!');
     }
