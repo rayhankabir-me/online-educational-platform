@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/auth/auth.module';
 import { CategoriesService } from 'src/categories/categories.service';
@@ -11,6 +12,6 @@ import { CoursesService } from './courses.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Course, Category, User]), AuthModule],
   controllers: [CoursesController],
-  providers: [CoursesService, CategoriesService],
+  providers: [CoursesService, CategoriesService, JwtService],
 })
 export class CoursesModule {}

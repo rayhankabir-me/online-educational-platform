@@ -13,6 +13,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { InjectRepository } from '@nestjs/typeorm';
 import { GetUser } from 'src/auth/get-user.decorator';
+import { RolesGards } from 'src/auth/roles.guards';
 import { Course } from 'src/entities/course.entity';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
@@ -45,23 +46,12 @@ export class CoursesController {
   }
 
   @Post('create')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard(), RolesGards)
   async create(
     @Body() createCourseDto: CreateCourseDto,
     @GetUser() user: User,
   ) {
     return this.coursesService.create(createCourseDto, user);
-
-    // const course = new Course();
-    // course.title = createCourseDto.title;
-    // course.description = createCourseDto.description;
-    // course.rating = createCourseDto.rating;
-    // course.created_at = createCourseDto.created_at;
-    // course.updated_at = createCourseDto.updated_at;
-    // course.created_by = createCourseDto.created_by;
-    // course.category = createCourseDto.categoryId;
-
-    // return await this.courseRepository.save(course);
   }
 
   @Get(':id')
