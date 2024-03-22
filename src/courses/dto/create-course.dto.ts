@@ -21,9 +21,8 @@ export class CreateCourseDto {
   updated_at: Date;
 
   @IsNotEmpty()
-  @IsInt()
-  created_by: number;
-
-  @IsNotEmpty()
   categoryId: any;
+
+  // @IsNotEmpty()
+  // userId: any;
 }

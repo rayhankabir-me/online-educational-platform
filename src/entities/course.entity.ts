@@ -22,12 +22,9 @@ export class Course {
   @Column()
   updated_at: Date;
 
-  @Column({ nullable: false })
-  created_by: number;
-
   @ManyToOne(() => Category, (category) => category.courses)
   category: Category;
 
-  @ManyToOne(() => User, (user) => user.courses)
+  @ManyToOne(() => User, (user) => user.courses, { eager: true })
   user: User;
 }

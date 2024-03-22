@@ -7,10 +7,13 @@ import {
   ParseIntPipe,
   Patch,
   Post,
-  ValidationPipe,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { InjectRepository } from '@nestjs/typeorm';
+import { GetUser } from 'src/auth/get-user.decorator';
 import { Course } from 'src/entities/course.entity';
+import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
@@ -35,8 +38,12 @@ export class CoursesController {
   }
 
   @Post('create')
-  async create(@Body(ValidationPipe) createCourseDto: CreateCourseDto) {
-    return this.coursesService.create(createCourseDto);
+  @UseGuards(AuthGuard())
+  async create(
+    @Body() createCourseDto: CreateCourseDto,
+    @GetUser() user: User,
+  ) {
+    return this.coursesService.create(createCourseDto, user);
 
     // const course = new Course();
     // course.title = createCourseDto.title;

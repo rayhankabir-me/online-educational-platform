@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from 'src/entities/category.entity';
 import { Course } from 'src/entities/course.entity';
+import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
@@ -16,7 +17,7 @@ export class CoursesService {
     private readonly categoryRepository: Repository<Category>,
   ) {}
 
-  async create(createCourseDto: CreateCourseDto) {
+  async create(createCourseDto: CreateCourseDto, user: User) {
     //method 1 (not working categoryId gets null input)
     //return await this.courseRepository.save(createCourseDto);
 
@@ -36,6 +37,7 @@ export class CoursesService {
     const course = this.courseRepository.create({
       ...courseData,
       category: { id: categoryId },
+      user,
     });
 
     return await this.courseRepository.save(course);
