@@ -29,4 +29,6 @@ export class CreateUserDto {
       'Password too weak. Use numbers, characters, capital and small letters',
   })
   password: string;
+
+  role: string;
 }

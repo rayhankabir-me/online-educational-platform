@@ -20,7 +20,7 @@ export class AuthService {
   ) {}
 
   async createUser(createUserDto: CreateUserDto) {
-    const { username, email, password } = createUserDto;
+    const { username, email, password, role } = createUserDto;
 
     const existsName = await this.userRepository.findOneBy({
       username: username,
@@ -36,7 +36,12 @@ export class AuthService {
       throw new BadRequestException('This email is already used in an account');
     }
 
-    const user = this.userRepository.create({ username, email, password });
+    const user = this.userRepository.create({
+      username,
+      email,
+      password,
+      role,
+    });
     return await this.userRepository.save(user);
   }
 
@@ -45,7 +50,7 @@ export class AuthService {
 
     const user = await this.userRepository.findOneBy({ username: username });
     if (user && (await bcrypt.compare(password, (await user).password))) {
-      const payload = { username };
+      const payload = { username, role: user.role };
       return {
         access_token: await this.jwtService.sign(payload),
       };

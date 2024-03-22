@@ -11,6 +11,14 @@ export class CreateCourseDto {
   @IsString()
   description: string;
 
+  @IsNotEmpty({ message: 'You must set an image' })
+  @IsString()
+  image: string;
+
+  @IsNotEmpty({ message: 'You must fill price' })
+  @IsString()
+  price: string;
+
   @IsInt()
   rating: number;
 
@@ -22,7 +30,4 @@ export class CreateCourseDto {
 
   @IsNotEmpty()
   categoryId: any;
-
-  // @IsNotEmpty()
-  // userId: any;
 }

@@ -14,6 +14,12 @@ export class Course {
   description: string;
 
   @Column()
+  image: string;
+
+  @Column()
+  price: string;
+
+  @Column()
   rating: number;
 
   @Column()
@@ -25,6 +31,6 @@ export class Course {
   @ManyToOne(() => Category, (category) => category.courses)
   category: Category;
 
-  @ManyToOne(() => User, (user) => user.courses, { eager: true })
+  @ManyToOne(() => User, (user) => user.courses)
   user: User;
 }
