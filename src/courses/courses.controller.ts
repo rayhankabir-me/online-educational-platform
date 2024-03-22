@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -30,6 +31,12 @@ export class CoursesController {
   @Get()
   findAll() {
     return this.coursesService.findAll();
+  }
+
+  //search courses
+  @Get('search')
+  searchCourse(@Query() terms: any) {
+    return this.coursesService.searchCourses(terms);
   }
 
   @Get('withcategories')

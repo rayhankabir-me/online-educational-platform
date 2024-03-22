@@ -57,6 +57,35 @@ export class CoursesService {
     return course;
   }
 
+  async searchCourses(terms) {
+    const { categoryId, type, term } = terms;
+
+    const result = await this.courseRepository
+      .createQueryBuilder('course')
+      .leftJoinAndSelect('course.category', 'category');
+
+    if (categoryId) {
+      result.andWhere('category.id = :categoryId', { categoryId });
+    }
+
+    if (type === 'free') {
+      result.andWhere('course.price = :price', { price: '0.00' });
+    } else if (type === 'paid') {
+      result.andWhere('course.price > :price', { price: '0.00' });
+    }
+
+    if (term) {
+      result.andWhere(
+        '(course.title LIKE :term OR course.description LIKE :term)',
+        {
+          term: `%${term}%`,
+        },
+      );
+    }
+
+    return result.getMany();
+  }
+
   async update(id: number, updateCourseDto: UpdateCourseDto) {
     const course = await this.courseRepository.findOneBy({
       id: id,
@@ -91,9 +120,9 @@ export class CoursesService {
     });
 
     //method 2 - query builder (working)
-    //   return await this.courseRepository
-    //     .createQueryBuilder('course')
-    //     .leftJoinAndSelect('course.category', 'category')
-    //     .getMany();
+    // return await this.courseRepository
+    //   .createQueryBuilder('course')
+    //   .leftJoinAndSelect('course.category', 'category')
+    //   .getMany();
   }
 }
