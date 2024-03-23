@@ -102,19 +102,23 @@ export class CoursesService {
   }
 
   //update course his his whoose whoose
-  async update(id: number, updateCourseDto: UpdateCourseDto) {
-    const course = await this.courseRepository.findOneBy({
-      id: id,
+  async update(id: number, updateCourseDto: UpdateCourseDto, user: User) {
+    const course = await this.courseRepository.findOne({
+      where: { id, user },
+      relations: ['user', 'category'],
     });
     if (!course) {
       throw new NotFoundException('Sorry the course not found');
     }
     course.title = updateCourseDto.title;
     course.description = updateCourseDto.description;
+    course.image = updateCourseDto.image;
+    course.price = updateCourseDto.price;
     course.rating = updateCourseDto.rating;
-    course.updated_at = updateCourseDto.updated_at;
+    course.updated_at = new Date();
+    course.category = updateCourseDto.categoryId;
 
-    await this.courseRepository.save(course);
+    return await this.courseRepository.save(course);
   }
 
   async remove(id: number) {

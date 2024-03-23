@@ -1,8 +1,6 @@
-import { PartialType } from '@nestjs/mapped-types';
 import { IsDateString, IsInt, IsNotEmpty, IsString } from 'class-validator';
-import { CreateCourseDto } from './create-course.dto';
 
-export class UpdateCourseDto extends PartialType(CreateCourseDto) {
+export class UpdateCourseDto {
   @IsNotEmpty({ message: 'You must provide course tilte' })
   @IsString()
   title: string;
@@ -11,9 +9,20 @@ export class UpdateCourseDto extends PartialType(CreateCourseDto) {
   @IsString()
   description: string;
 
+  @IsNotEmpty({ message: 'You must set an image' })
+  @IsString()
+  image: string;
+
+  @IsNotEmpty({ message: 'You must fill price' })
+  @IsString()
+  price: string;
+
   @IsInt()
   rating: number;
 
   @IsDateString()
   updated_at: Date;
+
+  @IsNotEmpty()
+  categoryId: any;
 }

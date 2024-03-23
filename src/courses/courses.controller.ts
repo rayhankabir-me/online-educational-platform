@@ -9,6 +9,7 @@ import {
   Post,
   Query,
   UseGuards,
+  ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -54,13 +55,15 @@ export class CoursesController {
     return this.coursesService.findOne(id);
   }
 
+  //update course his his whoose whoose
   @Patch(':id')
+  @UseGuards(AuthGuard(), RolesGards)
   async update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateCourseDto: UpdateCourseDto,
+    @Body(ValidationPipe) updateCourseDto: UpdateCourseDto,
+    @GetUser() user: User,
   ) {
-    await this.coursesService.update(id, updateCourseDto);
-    return { message: 'The course updated successfully' };
+    return await this.coursesService.update(id, updateCourseDto, user);
   }
 
   @Delete(':id')
