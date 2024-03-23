@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,6 +11,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -57,5 +59,57 @@ export class AuthService {
     } else {
       throw new UnauthorizedException('Invalid login credentials!');
     }
+  }
+
+  async allUsers() {
+    const users = await this.userRepository.find();
+
+    if (!users) {
+      throw new NotFoundException('Sorry, no users found!');
+    }
+    return users;
+  }
+
+  async findOne(id: number) {
+    const user = await this.userRepository.findOneBy({
+      id: id,
+    });
+    if (!user) {
+      throw new NotFoundException('Sorry, the user not found');
+    }
+    return user;
+  }
+
+  //update user info (only admin can do)
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const user = await this.userRepository.findOneBy({
+      id: id,
+    });
+    if (!user) {
+      throw new NotFoundException('Sorry the user not found');
+    }
+
+    const { username, email } = updateUserDto;
+
+    const existsName = await this.userRepository.findOneBy({
+      username: username,
+    });
+    const existsEmail = await this.userRepository.findOneBy({
+      email: email,
+    });
+
+    if (existsName) {
+      throw new BadRequestException('Username already exists!');
+    }
+    if (existsEmail) {
+      throw new BadRequestException('This email is already used in an account');
+    }
+
+    user.username = updateUserDto.username;
+    user.email = updateUserDto.email;
+    user.password = updateUserDto.password;
+    user.role = updateUserDto.role;
+
+    return await this.userRepository.save(user);
   }
 }
