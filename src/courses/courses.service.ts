@@ -57,6 +57,7 @@ export class CoursesService {
     return course;
   }
 
+  //searching courses
   async searchCourses(terms) {
     const { categoryId, type, term } = terms;
 

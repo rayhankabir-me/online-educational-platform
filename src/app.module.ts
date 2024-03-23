@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CategoriesModule } from './categories/categories.module';
 import { CoursesModule } from './courses/courses.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { CoursesModule } from './courses/courses.module';
     TypeOrmModule.forRoot(config),
     CategoriesModule,
     AuthModule,
+    OrdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

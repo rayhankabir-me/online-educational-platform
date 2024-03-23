@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Course } from './course.entity';
+import { Order } from './order.entity';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
@@ -33,4 +34,9 @@ export class User {
     cascade: true,
   })
   courses: Course[];
+
+  @OneToMany(() => Order, (order) => order.user, {
+    cascade: true,
+  })
+  orders: Order[];
 }
