@@ -19,7 +19,7 @@ export class Order {
   @Column()
   updated_at: Date;
 
-  @ManyToOne(() => User, (user) => user.orders, { eager: true })
+  @ManyToOne(() => User, (user) => user.orders)
   @Exclude({ toPlainOnly: true })
   user: User;
 
