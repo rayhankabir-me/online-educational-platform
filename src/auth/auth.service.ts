@@ -70,6 +70,7 @@ export class AuthService {
     return users;
   }
 
+  //fine one user (get user details)
   async findOne(id: number) {
     const user = await this.userRepository.findOneBy({
       id: id,
@@ -78,6 +79,19 @@ export class AuthService {
       throw new NotFoundException('Sorry, the user not found');
     }
     return user;
+  }
+
+  //get my profile( logged in user can)
+  async myProfile(user: User) {
+    const profile = await this.userRepository.findOneBy({
+      username: user.username,
+    });
+
+    if (!profile) {
+      throw new NotFoundException('Sorry, the profile not found!');
+    }
+
+    return profile;
   }
 
   //update user info (only admin can do)

@@ -40,6 +40,12 @@ export class AuthController {
     return this.authService.allUsers();
   }
 
+  @Get('my-profile')
+  @UseGuards(AuthGuard())
+  myProfile(@GetUser() user: User) {
+    return this.authService.myProfile(user);
+  }
+
   //checking profile
   @Post('/profile')
   @UseGuards(AuthGuard())
