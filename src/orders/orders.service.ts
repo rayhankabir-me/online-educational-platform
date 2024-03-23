@@ -18,6 +18,7 @@ export class OrdersService {
 
   //any loggedin users can create order
   async create(createOrderDto: CreateOrderDto, user: User) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { order_date, updated_at, ...orderData } = createOrderDto;
     const order = this.orderRepository.create({
       ...orderData,
@@ -76,11 +77,34 @@ export class OrdersService {
     return order;
   }
 
-  update(id: number, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
+  //admin can update order status to completed or processing
+  async update(id: number, updateOrderDto: UpdateOrderDto) {
+    const orderFound = await this.orderRepository.findOne({
+      where: { id },
+      relations: ['user'],
+    });
+    if (!orderFound) {
+      throw new NotFoundException('Sorry, the order not found');
+    }
+    orderFound.order_status = updateOrderDto.order_status;
+    orderFound.updated_at = new Date();
+
+    return await this.orderRepository.save(orderFound);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} order`;
+  //admin can delete order
+  async remove(id: number) {
+    const orderToDelete = await this.orderRepository.findOneBy({
+      id: id,
+    });
+    if (!orderToDelete) {
+      throw new NotFoundException('Sorry, the order not found');
+    }
+    try {
+      await this.orderRepository.remove(orderToDelete);
+      return 'Order deleted successfully!';
+    } catch (error) {
+      throw new Error('Sorry, Failed to delete the order');
+    }
   }
 }

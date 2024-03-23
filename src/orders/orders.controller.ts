@@ -55,12 +55,16 @@ export class OrdersController {
     return this.ordersService.myOrder(+id, user);
   }
 
+  //admin can update order status to completed or processing
   @Patch(':id')
+  @UseGuards(AuthGuard(), AdminGuard)
   update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
     return this.ordersService.update(+id, updateOrderDto);
   }
 
+  //adminc can delete order
   @Delete(':id')
+  @UseGuards(AuthGuard(), AdminGuard)
   remove(@Param('id') id: string) {
     return this.ordersService.remove(+id);
   }
