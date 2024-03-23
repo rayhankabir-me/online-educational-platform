@@ -1,3 +1,4 @@
+import { Exclude, Expose } from 'class-transformer';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Category } from './category.entity';
 import { User } from './user.entity';
@@ -32,5 +33,12 @@ export class Course {
   category: Category;
 
   @ManyToOne(() => User, (user) => user.courses)
+  @Exclude({ toPlainOnly: true })
   user: User;
+
+  @Expose()
+  created_by(): any {
+    const { id, username, email, role } = this.user;
+    return { id, username, email, role };
+  }
 }

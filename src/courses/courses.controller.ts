@@ -40,11 +40,6 @@ export class CoursesController {
     return this.coursesService.searchCourses(terms);
   }
 
-  @Get('withcategories')
-  findwithCategory() {
-    return this.coursesService.findwithCategory();
-  }
-
   @Post('create')
   @UseGuards(AuthGuard(), RolesGards)
   async create(

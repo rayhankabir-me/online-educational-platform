@@ -33,9 +33,13 @@ export class CoursesService {
     // return await this.courseRepository.save(course);
 
     //method 3 destrucuring (also working)
-    const { categoryId, ...courseData } = createCourseDto;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { created_at, updated_at, categoryId, ...courseData } =
+      createCourseDto;
     const course = this.courseRepository.create({
       ...courseData,
+      created_at: new Date(),
+      updated_at: new Date(),
       category: { id: categoryId },
       user,
     });
@@ -43,13 +47,22 @@ export class CoursesService {
     return await this.courseRepository.save(course);
   }
 
+  //find all courses
   async findAll() {
-    return await this.courseRepository.find();
+    const courses = await this.courseRepository.find({
+      relations: ['user', 'category'],
+    });
+    if (!courses) {
+      throw new NotFoundException('Sorry, no courses found');
+    }
+    return courses;
   }
 
+  //find one course or course details page
   async findOne(id: number) {
-    const course = await this.courseRepository.findOneBy({
-      id: id,
+    const course = await this.courseRepository.findOne({
+      where: { id },
+      relations: ['user', 'category'],
     });
     if (!course) {
       throw new NotFoundException('Sorry, the course not found');
@@ -63,7 +76,8 @@ export class CoursesService {
 
     const result = await this.courseRepository
       .createQueryBuilder('course')
-      .leftJoinAndSelect('course.category', 'category');
+      .leftJoinAndSelect('course.category', 'category')
+      .leftJoinAndSelect('course.user', 'user');
 
     if (categoryId) {
       result.andWhere('category.id = :categoryId', { categoryId });
@@ -87,6 +101,7 @@ export class CoursesService {
     return result.getMany();
   }
 
+  //update course his his whoose whoose
   async update(id: number, updateCourseDto: UpdateCourseDto) {
     const course = await this.courseRepository.findOneBy({
       id: id,
@@ -110,20 +125,5 @@ export class CoursesService {
       throw new NotFoundException('Sorry, the course not found');
     }
     await this.courseRepository.remove(courseToDelete);
-  }
-
-  async findwithCategory() {
-    //method 1
-    return await this.courseRepository.find({
-      relations: {
-        category: true,
-      },
-    });
-
-    //method 2 - query builder (working)
-    // return await this.courseRepository
-    //   .createQueryBuilder('course')
-    //   .leftJoinAndSelect('course.category', 'category')
-    //   .getMany();
   }
 }

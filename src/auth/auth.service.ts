@@ -21,6 +21,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  //create user or register user
   async createUser(createUserDto: CreateUserDto) {
     const { username, email, password, role } = createUserDto;
 
@@ -47,6 +48,7 @@ export class AuthService {
     return await this.userRepository.save(user);
   }
 
+  //login user and generate token
   async loginUser(createUserDto: CreateUserDto) {
     const { username, password } = createUserDto;
 
@@ -61,6 +63,7 @@ export class AuthService {
     }
   }
 
+  //find all users (admin can do)
   async allUsers() {
     const users = await this.userRepository.find();
 
