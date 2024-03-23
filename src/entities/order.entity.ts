@@ -1,3 +1,4 @@
+import { Exclude, Expose } from 'class-transformer';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './user.entity';
 
@@ -18,6 +19,13 @@ export class Order {
   @Column()
   updated_at: Date;
 
-  @ManyToOne(() => User, (user) => user.orders)
+  @ManyToOne(() => User, (user) => user.orders, { eager: true })
+  @Exclude({ toPlainOnly: true })
   user: User;
+
+  @Expose()
+  order_by(): any {
+    const { id, username, email, role } = this.user;
+    return { id, username, email, role };
+  }
 }
