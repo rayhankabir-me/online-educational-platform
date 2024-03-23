@@ -13,6 +13,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { InjectRepository } from '@nestjs/typeorm';
+import { AdminGuard } from 'src/auth/admin.guards';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { RolesGards } from 'src/auth/roles.guards';
 import { Course } from 'src/entities/course.entity';
@@ -67,6 +68,7 @@ export class CoursesController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard(), AdminGuard)
   async remove(@Param('id', ParseIntPipe) id: number) {
     await this.coursesService.remove(id);
     return { message: 'The course deleted successfully..' };
