@@ -26,6 +26,7 @@ export class CategoriesService {
       relations: ['courses'],
     });
     if (!category) {
+      console.log("mrittika change korse")
       throw new NotFoundException('Sorry, the category not found');
     }
     return category;
