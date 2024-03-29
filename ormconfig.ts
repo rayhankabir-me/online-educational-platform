@@ -1,3 +1,4 @@
+import { Applyinstructor } from 'src/entities/applyinstructor.entity';
 import { Category } from 'src/entities/category.entity';
 import { Course } from 'src/entities/course.entity';
 import { Order } from 'src/entities/order.entity';
@@ -10,8 +11,8 @@ const config: PostgresConnectionOptions = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'postgres',
-  entities: [Course, Category, User, Order],
+  password: 'admin',
+  entities: [Course, Category, User, Order,Applyinstructor],
   synchronize: true,
 };
 
