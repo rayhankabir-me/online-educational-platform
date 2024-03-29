@@ -29,7 +29,7 @@ export class Course {
   @Column()
   updated_at: Date;
 
-  @ManyToOne(() => Category, (category) => category.courses)
+  @ManyToOne(() => Category, (category) => category.courses, /*{ onDelete: 'CASCADE' }*/)
   category: Category;
 
   @ManyToOne(() => User, (user) => user.courses)

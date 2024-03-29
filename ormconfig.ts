@@ -10,7 +10,8 @@ const config: PostgresConnectionOptions = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'postgres',
+  //password: 'postgres',
+  password: 'mrittika',
   entities: [Course, Category, User, Order],
   synchronize: true,
 };
