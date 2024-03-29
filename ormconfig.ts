@@ -11,8 +11,11 @@ const config: PostgresConnectionOptions = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
+
   password: 'admin',
   entities: [Course, Category, User, Order,Applyinstructor],
+
+  
   synchronize: true,
 };
 
