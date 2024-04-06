@@ -10,12 +10,14 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
 
 const config: PostgresConnectionOptions = {
   type: 'postgres',
-  database: 'onlineLearningPlatform',
+ // database: 'onlineLearningPlatform',
+ database: 'postgres',
   host: 'localhost',
   port: 5432,
   username: 'postgres',
 
-  password: 'admin',
+ // password: 'admin',
+ password: 'Abdulla',
   entities: [Course, Category, User, Order,Applyinstructor,Invoice,Blog,ContractForm],
 
   
