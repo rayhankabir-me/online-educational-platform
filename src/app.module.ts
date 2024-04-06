@@ -9,6 +9,9 @@ import { CoursesModule } from './courses/courses.module';
 import { OrdersModule } from './orders/orders.module';
 import { OrderItemModule } from './order-item/order-item.module';
 import { ApplyinstructorModule } from './applyinstructor/applyinstructor.module';
+import { InvoiceModule } from './invoice/invoice.module';
+import { ContractFormModule } from './contract-form/contract-form.module';
+import { BlogModule } from './post/blog/blog.module';
 
 @Module({
   imports: [
@@ -19,6 +22,9 @@ import { ApplyinstructorModule } from './applyinstructor/applyinstructor.module'
     OrdersModule,
     OrderItemModule,
     ApplyinstructorModule,
+    InvoiceModule,
+    ContractFormModule,
+    BlogModule,
   ],
   controllers: [AppController],
   providers: [AppService],
