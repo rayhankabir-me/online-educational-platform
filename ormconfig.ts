@@ -1,3 +1,4 @@
+import { BookStore } from 'src/entities/book-store.entity';
 import { Category } from 'src/entities/category.entity';
 import { Course } from 'src/entities/course.entity';
 import { Order } from 'src/entities/order.entity';
@@ -12,7 +13,7 @@ const config: PostgresConnectionOptions = {
   username: 'postgres',
   //password: 'postgres',
   password: 'mrittika',
-  entities: [Course, Category, User, Order],
+  entities: [Course, Category, User, Order, BookStore],
   synchronize: true,
 };
 

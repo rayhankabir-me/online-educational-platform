@@ -9,6 +9,7 @@ import { CoursesModule } from './courses/courses.module';
 import { OrdersModule } from './orders/orders.module';
 import { OrderItemModule } from './order-item/order-item.module';
 import { ApplyinstructorModule } from './applyinstructor/applyinstructor.module';
+import { BookStoreModule } from './book-store/book-store.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ApplyinstructorModule } from './applyinstructor/applyinstructor.module'
     OrdersModule,
     OrderItemModule,
     ApplyinstructorModule,
+    BookStoreModule,
   ],
   controllers: [AppController],
   providers: [AppService],
