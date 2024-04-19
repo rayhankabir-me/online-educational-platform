@@ -31,6 +31,7 @@ export class BookStoreController {
   }
 
   @Post('upload')
+  @UseGuards(AuthGuard(), AdminGuard)
   @UseInterceptors(
     FileInterceptor('file', {
       fileFilter: (req, file, cb) => {
@@ -70,14 +71,14 @@ export class BookStoreController {
     return this.bookStoreService.findOneByName(course_id);
   }
 
-  @Patch(':course_id')
+  @Patch(':id')
   @UseGuards(AuthGuard(), AdminGuard)
   async update(@Param('id') id: string, @Body() updateBookStoreDto: UpdateBookStoreDto) {
     await this.bookStoreService.update(+id, updateBookStoreDto);
     return { message: 'The book has been updated successfully' };
   }
 
-  @Delete('delete/:course_id')
+  @Delete('delete/:id')
   @UseGuards(AuthGuard(), AdminGuard)
   async remove(@Param('id', ParseIntPipe) id: number) {
     await this.bookStoreService.remove(id);

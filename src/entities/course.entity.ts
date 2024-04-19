@@ -34,8 +34,8 @@ export class Course {
   category: Category;
 
   //joining for book store
-  @ManyToOne(() => BookStore, (bookstore) => bookstore.courses, )
-  bookstore: BookStore;
+  // @ManyToOne(() => BookStore, (bookstore) => bookstore.courses, )
+  // bookstore: BookStore;
 
   @ManyToOne(() => User, (user) => user.courses)
   @Exclude({ toPlainOnly: true })

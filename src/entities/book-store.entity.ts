@@ -12,10 +12,10 @@ export class BookStore {
   @Column({ nullable: false })
   image: string;
 
-  @OneToMany(() => Course, (course) => course.bookstore, {
-    cascade: true,
-    })
-    courses: Course[];
+  // @OneToMany(() => Course, (course) => course.bookstore, {
+  //   cascade: true,
+  //   })
+  //   courses: Course[];
 
 //   @Column({ nullable: false })
 //   description: string;

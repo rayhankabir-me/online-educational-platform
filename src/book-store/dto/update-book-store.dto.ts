@@ -11,9 +11,9 @@ export class UpdateBookStoreDto extends PartialType(CreateBookStoreDto) {
     @IsNotEmpty()
     image: string;
 
-    @IsString()
-    @IsNotEmpty()
-    description: string;
+    // @IsString()
+    // @IsNotEmpty()
+    // description: string;
 
     @IsString()
     @IsNotEmpty()
