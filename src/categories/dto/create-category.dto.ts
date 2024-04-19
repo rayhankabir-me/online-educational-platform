@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsString, isString } from 'class-validator';
+import { CreateCartDto } from 'src/cart/dto/create-cart.dto';
 import { CreateCourseDto } from 'src/courses/dto/create-course.dto';
 
 export class CreateCategoryDto {
@@ -19,4 +20,5 @@ export class CreateCategoryDto {
   added_by: string;
 
   courses: CreateCourseDto[];
+  carts: CreateCartDto[];
 }

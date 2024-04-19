@@ -10,6 +10,7 @@ import { Newcourse } from 'src/entities/newcourse.entity';
 import { Invoice } from 'src/entities/invoice.entity';
 import { Order } from 'src/entities/order.entity';
 import { User } from 'src/entities/user.entity';
+import { Cart } from 'src/entities/cart.entity';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 const config: PostgresConnectionOptions = {
@@ -22,7 +23,7 @@ const config: PostgresConnectionOptions = {
   //password: 'postgres',
   password: 'mrittika',
   //password: 'admin',
-  entities: [Course, Category, User, Order, BookStore, Applyinstructor,Invoice,Blog,ContractForm,Coursereview,Newcourse,Forum],
+  entities: [Course, Category, User, Order, BookStore, Applyinstructor, Invoice, Blog, ContractForm, Coursereview, Newcourse, Forum, Cart],
   synchronize: true,
 };
 

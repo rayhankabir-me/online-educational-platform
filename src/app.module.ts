@@ -17,6 +17,7 @@ import { InvoiceModule } from './invoice/invoice.module';
 import { ContractFormModule } from './contract-form/contract-form.module';
 import { BlogModule } from './post/blog/blog.module';
 import { BookStoreModule } from './book-store/book-store.module';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { BookStoreModule } from './book-store/book-store.module';
     InvoiceModule,
     ContractFormModule,
     BlogModule,
+    CartModule
 
   ],
   controllers: [AppController],
