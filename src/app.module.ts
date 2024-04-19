@@ -9,6 +9,10 @@ import { CoursesModule } from './courses/courses.module';
 import { OrdersModule } from './orders/orders.module';
 import { OrderItemModule } from './order-item/order-item.module';
 import { ApplyinstructorModule } from './applyinstructor/applyinstructor.module';
+import { CoursereviewModule } from './coursereview/coursereview.module';
+import { NewcourseModule } from './newcourse/newcourse.module';
+import { ForumModule } from './forum/forum.module';
+import { QuizModule } from './quiz/quiz.module';
 
 @Module({
   imports: [
@@ -19,6 +23,10 @@ import { ApplyinstructorModule } from './applyinstructor/applyinstructor.module'
     OrdersModule,
     OrderItemModule,
     ApplyinstructorModule,
+    CoursereviewModule,
+    NewcourseModule,
+    ForumModule,
+    QuizModule,
   ],
   controllers: [AppController],
   providers: [AppService],

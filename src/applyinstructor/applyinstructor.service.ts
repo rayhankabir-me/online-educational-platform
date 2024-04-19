@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class ApplyinstructorService {
+   
  
   constructor(
     @InjectRepository(Applyinstructor) private readonly applyinstructorRepo: Repository<Applyinstructor>,
@@ -27,6 +28,15 @@ export class ApplyinstructorService {
     const user = await this.applyinstructorRepo.findOne({ where: { id: id } });
     user.approval = true;
     return this.applyinstructorRepo.save(user);
+  }
+
+  async update(id: number, updateApplyinstructorDto: UpdateApplyinstructorDto): Promise<void> {
+    const applyinstructor = await this.applyinstructorRepo.findOne({ where: { id: id } });
+ 
+    if (!applyinstructor) {
+      throw new NotFoundException(' not found');
+    }
+    await this.applyinstructorRepo.update(applyinstructor.id, updateApplyinstructorDto);
   }
   findOne(id: number) {
     return `This action returns a #${id} applyinstructor`;

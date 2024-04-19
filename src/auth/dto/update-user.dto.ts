@@ -28,5 +28,6 @@ export class UpdateUserDto {
   })
   password: string;
 
-  role: string;
+    @IsString()
+    role: string;
 }

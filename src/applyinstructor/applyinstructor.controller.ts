@@ -48,11 +48,22 @@ export class ApplyinstructorController {
   ApplyInstructor() { 
   return this.applyinstructorService.ApplyInstructor();
   } 
+  
   @Patch('Admin/applyinstructor/:id')
   @UseGuards(AuthGuard(), AdminGuard)
   approveApplyInstructor(@Param('id') id: number) { 
   return this.applyinstructorService.approveApplyInstructor(id);
   }
+
+  @Patch('Admin/applyinstructor/:id')
+  @UseGuards(AuthGuard(), AdminGuard)
+  async update(
+  @Param('id') id: number,
+  @Body() updateApplyinstructorDto: UpdateApplyinstructorDto,
+) {
+  await this.applyinstructorService.update(id, updateApplyinstructorDto);
+  return { message: 'This user become an Instructor' };
+}
   @Get()
   async findAll() {
     return await this.applyinstructorService.findAll();
