@@ -9,7 +9,6 @@ import { AuthModule } from './auth/auth.module';
 import { CategoriesModule } from './categories/categories.module';
 import { CoursesModule } from './courses/courses.module';
 import { OrderItemModule } from './order-item/order-item.module';
-import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -24,6 +23,15 @@ import { OrdersModule } from './orders/orders.module';
     OrdersModule,
     OrderItemModule,
     ApplyinstructorModule,
+    CoursereviewModule,
+    NewcourseModule,
+    ForumModule,
+    QuizModule,
+    BookStoreModule,
+    InvoiceModule,
+    ContractFormModule,
+    BlogModule,
+    CartModule,
   ],
   controllers: [AppController],
   providers: [AppService],
