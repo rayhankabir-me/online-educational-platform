@@ -28,6 +28,7 @@ export class CartController {
   await this.cartService.update(course_id, updateCartDto);
   return { message: 'The cart has been updated successfully' };
   }
+  
 
   @Delete(':course_id')
   async remove(@Param('course_id', ParseIntPipe) course_id: number) {

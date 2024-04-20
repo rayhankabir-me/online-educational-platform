@@ -28,14 +28,16 @@ export class CartService {
     return cartItem;
   }
   
+  //update cart by course_id
   async update(course_id: number, updateCartDto: UpdateCartDto): Promise<void> {
     const itemInCart = await this.cartRepo.findOne({ where: { course_id: course_id } });
   
     if (!itemInCart) {
-      throw new NotFoundException('Category not found'); 
+      throw new NotFoundException('Item not found'); 
     }
     await this.cartRepo.update(itemInCart.id, updateCartDto);
   }
+  
 
   async remove(course_id: number) {
     const courseToDelete = await this.cartRepo.findOneBy({
