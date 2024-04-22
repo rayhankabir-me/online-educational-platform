@@ -1,6 +1,4 @@
-import { IsNotEmpty, IsString, isString } from 'class-validator';
-import { CreateCartDto } from 'src/cart/dto/create-cart.dto';
-import { CreateCourseDto } from 'src/courses/dto/create-course.dto';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateCategoryDto {
   id: number;
@@ -18,7 +16,4 @@ export class CreateCategoryDto {
   @IsString()
   @IsNotEmpty()
   added_by: string;
-
-  courses: CreateCourseDto[];
-  carts: CreateCartDto[];
 }

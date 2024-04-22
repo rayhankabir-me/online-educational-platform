@@ -1,7 +1,6 @@
 import { Exclude, Expose } from 'class-transformer';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Category } from './category.entity';
-import { BookStore } from './book-store.entity';
 import { User } from './user.entity';
 
 @Entity('courses')
@@ -30,7 +29,10 @@ export class Course {
   @Column()
   updated_at: Date;
 
-  @ManyToOne(() => Category, (category) => category.courses, /*{ onDelete: 'CASCADE' }*/)
+  @ManyToOne(
+    () => Category,
+    (category) => category.courses /*{ onDelete: 'CASCADE' }*/,
+  )
   category: Category;
 
   //joining for book store

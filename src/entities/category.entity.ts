@@ -12,14 +12,14 @@ export class Category {
   @Column()
   image_url: string;
 
-  @Column({nullable: false })
+  @Column({ nullable: false })
   added_by: string;
 
   @Column({ unique: true, nullable: false })
   category_name: string;
 
   @OneToMany(() => Course, (course) => course.category, {
-  cascade: true,
+    cascade: true,
   })
   courses: Course[];
 }
