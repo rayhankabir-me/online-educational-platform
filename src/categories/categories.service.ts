@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from 'src/entities/category.entity';
-import { Course } from 'src/entities/course.entity';
+import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -13,8 +13,16 @@ export class CategoriesService {
     private readonly categoryRepo: Repository<Category>,
   ) {}
 
-  async create(createCategoryDto: CreateCategoryDto) {
-    return await this.categoryRepo.save(createCategoryDto);
+  async create(createCategoryDto: CreateCategoryDto, user: User) {
+    //return await this.categoryRepo.save(createCategoryDto);
+
+    const { ...categoryData } = createCategoryDto;
+    const category = this.categoryRepo.create({
+      ...categoryData,
+      user,
+    });
+
+    return await this.categoryRepo.save(category);
   }
 
   async findAll() {
@@ -31,18 +39,20 @@ export class CategoriesService {
     return category;
   }
 
-  async findAllCoursesByCategoryName(category_name: string): Promise<Course[]> {
-    const category = await this.categoryRepo.findOne({
-      where: { category_name: category_name },
-      relations: ['courses'],
-    });
+  //not need, search by category will be considered from course route
 
-    if (!category) {
-      throw new NotFoundException('Category not found');
-    }
+  // async findAllCoursesByCategoryName(category_name: string): Promise<Course[]> {
+  //   const category = await this.categoryRepo.findOne({
+  //     where: { category_name: category_name },
+  //     relations: ['courses'],
+  //   });
 
-    return category.courses;
-  }
+  //   if (!category) {
+  //     throw new NotFoundException('Category not found');
+  //   }
+
+  //   return category.courses;
+  // }
 
   async update(
     categoryName: string,

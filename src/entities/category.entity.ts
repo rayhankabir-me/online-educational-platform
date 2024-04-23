@@ -1,5 +1,13 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Exclude, Expose } from 'class-transformer';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Course } from './course.entity';
+import { User } from './user.entity';
 
 @Entity('categories')
 export class Category {
@@ -12,9 +20,6 @@ export class Category {
   @Column()
   image_url: string;
 
-  @Column({ nullable: false })
-  added_by: string;
-
   @Column({ unique: true, nullable: false })
   category_name: string;
 
@@ -22,4 +27,14 @@ export class Category {
     cascade: true,
   })
   courses: Course[];
+
+  @ManyToOne(() => User, (user) => user.courses)
+  @Exclude({ toPlainOnly: true })
+  user: User;
+
+  @Expose()
+  created_by(): any {
+    const { id, username, email, role } = this.user;
+    return { id, username, email, role };
+  }
 }

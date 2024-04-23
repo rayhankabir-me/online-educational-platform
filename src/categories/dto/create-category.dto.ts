@@ -12,8 +12,4 @@ export class CreateCategoryDto {
   @IsString()
   @IsNotEmpty()
   category_name: string;
-
-  @IsString()
-  @IsNotEmpty()
-  added_by: string;
 }
