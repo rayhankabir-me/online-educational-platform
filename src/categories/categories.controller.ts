@@ -8,6 +8,7 @@ import {
   Patch,
   Post,
   UseGuards,
+  ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AdminGuard } from 'src/auth/admin.guards';
@@ -47,14 +48,15 @@ export class CategoriesController {
     return this.categoriesService.findOne(+id);
   }
 
-  @Patch(':categoryName')
-  @UseGuards(AuthGuard(), AdminGuard)
+  //update category his his whoose whoose
+  @Patch(':id')
+  @UseGuards(AuthGuard(), RolesGards)
   async update(
-    @Param('categoryName') categoryName: string,
-    @Body() updateCategoryDto: UpdateCategoryDto,
+    @Param('id', ParseIntPipe) id: number,
+    @Body(ValidationPipe) updateCategoryDto: UpdateCategoryDto,
+    @GetUser() user: User,
   ) {
-    await this.categoriesService.update(categoryName, updateCategoryDto);
-    return { message: 'The category updated successfully' };
+    return await this.categoriesService.update(id, updateCategoryDto, user);
   }
 
   //not working

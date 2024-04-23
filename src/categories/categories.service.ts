@@ -61,18 +61,36 @@ export class CategoriesService {
   //   return category.courses;
   // }
 
-  async update(
-    categoryName: string,
-    updateCategoryDto: UpdateCategoryDto,
-  ): Promise<void> {
-    const category = await this.categoryRepo.findOne({
-      where: { category_name: categoryName },
-    });
+  //old  method by mrittika
 
+  // async update(
+  //   categoryName: string,
+  //   updateCategoryDto: UpdateCategoryDto,
+  // ): Promise<void> {
+  //   const category = await this.categoryRepo.findOne({
+  //     where: { category_name: categoryName },
+  //   });
+
+  //   if (!category) {
+  //     throw new NotFoundException('Category not found');
+  //   }
+  //   await this.categoryRepo.update(category.id, updateCategoryDto);
+  // }
+
+  //update category his his whoose whoose
+  async update(id: number, updateCategoryDto: UpdateCategoryDto, user: User) {
+    const category = await this.categoryRepo.findOne({
+      where: { id, user },
+      relations: ['user'],
+    });
     if (!category) {
-      throw new NotFoundException('Category not found');
+      throw new NotFoundException('Sorry the category not found');
     }
-    await this.categoryRepo.update(category.id, updateCategoryDto);
+    category.description = updateCategoryDto.description;
+    category.category_name = updateCategoryDto.category_name;
+    category.image_url = updateCategoryDto.image_url;
+
+    return await this.categoryRepo.save(category);
   }
 
   //not working
