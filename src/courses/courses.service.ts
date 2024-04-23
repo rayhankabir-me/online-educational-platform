@@ -32,6 +32,10 @@ export class CoursesService {
     // course.category = createCourseDto.categoryId;
     // return await this.courseRepository.save(course);
 
+    if (!user || !user.id) {
+      throw new Error('User is undefined or does not have an id property.');
+    }
+
     //method 3 destrucuring (also working)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { created_at, updated_at, categoryId, ...courseData } =

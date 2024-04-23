@@ -34,7 +34,11 @@ export class Category {
 
   @Expose()
   created_by(): any {
-    const { id, username, email, role } = this.user;
-    return { id, username, email, role };
+    if (this.user) {
+      const { id, username, email, role } = this.user;
+      return { id, username, email, role };
+    } else {
+      return null;
+    }
   }
 }

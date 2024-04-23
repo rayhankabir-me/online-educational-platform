@@ -14,8 +14,6 @@ export class CategoriesService {
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto, user: User) {
-    //return await this.categoryRepo.save(createCategoryDto);
-
     const { ...categoryData } = createCategoryDto;
     const category = this.categoryRepo.create({
       ...categoryData,
@@ -25,16 +23,25 @@ export class CategoriesService {
     return await this.categoryRepo.save(category);
   }
 
+  //find all categories
   async findAll() {
-    return await this.categoryRepo.find();
+    const categories = await this.categoryRepo.find({
+      relations: ['user'],
+    });
+    if (!categories) {
+      throw new NotFoundException('Sorry, no categories found');
+    }
+    return categories;
   }
 
+  //find one category or category details page
   async findOne(id: number) {
-    const category = await this.categoryRepo.find({
+    const category = await this.categoryRepo.findOne({
       where: { id },
+      relations: ['user'],
     });
     if (!category) {
-      throw new NotFoundException('Sorry, the category was not found');
+      throw new NotFoundException('Sorry, the category not found');
     }
     return category;
   }
