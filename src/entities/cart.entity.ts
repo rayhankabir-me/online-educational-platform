@@ -1,6 +1,7 @@
 import {BeforeInsert, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Category } from './category.entity';
+import { Exclude, Expose } from 'class-transformer';
+import { User } from './user.entity';
 
 @Entity('cart')
 export class Cart {
@@ -19,11 +20,25 @@ export class Cart {
   @Column({ nullable: false })
   price: number;
 
-  @Column({ nullable: false })
-  created_by: string;
+  // @Column({ nullable: false })
+  // created_by: string;
 
-  // @ManyToOne(() => Category, (category) => category.carts)
-  // category: Category;
-  
+  // @OneToMany(() => Course, (course) => course.cart, {
+  //   cascade: true,
+  // })
+  // courses: Course[];
 
+  @ManyToOne(() => User, (user) => user.courses)
+  @Exclude({ toPlainOnly: true })
+  user: User;
+
+  @Expose()
+  created_by(): any {
+    if (this.user) {
+      const { id, username, email, role } = this.user;
+      return { id, username, email, role };
+    } else {
+      return null;
+    }
+  }
 }

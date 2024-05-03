@@ -2,15 +2,28 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe, Pars
 import { CartService } from './cart.service';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { User } from 'src/entities/user.entity';
 
 @Controller('cart')
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
+  //my
+  // @Post('addToCart')
+  // async create(@Body(ValidationPipe) createCartDto: CreateCartDto) {
+  //   return this.cartService.create(createCartDto);    
+  // }
+
   @Post('addToCart')
-  async create(@Body(ValidationPipe) createCartDto: CreateCartDto) {
-    return this.cartService.create(createCartDto);    
+  //@UseGuards(AuthGuard())
+  async create(
+    @Body() createCartDto: CreateCartDto,
+    @GetUser() user: User,
+  ) {
+    return this.cartService.create(createCartDto, user);
   }
+
 
   @Get()
   findAll() {
@@ -23,10 +36,12 @@ export class CartController {
   }
 
   @Patch(':course_id') 
-  async update(@Param('course_id') course_id: number, @Body() updateCartDto: UpdateCartDto) {
-
-  await this.cartService.update(course_id, updateCartDto);
-  return { message: 'The cart has been updated successfully' };
+  async update(
+    @Param('course_id', ParseIntPipe) course_id: number,
+    @Body(ValidationPipe) updateCartDto: UpdateCartDto,
+    @GetUser() user: User,
+  ) {
+    return await this.cartService.update(course_id, updateCartDto, user);
   }
   
 

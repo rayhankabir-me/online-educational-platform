@@ -48,7 +48,7 @@ export class CategoriesController {
     return this.categoriesService.findOne(+id);
   }
 
-  //update category his his whoose whoose
+  //update category his his whose whose
   @Patch(':id')
   @UseGuards(AuthGuard(), RolesGards)
   async update(
@@ -59,7 +59,6 @@ export class CategoriesController {
     return await this.categoriesService.update(id, updateCategoryDto, user);
   }
 
-  //not working
   @Delete(':id')
   @UseGuards(AuthGuard(), AdminGuard)
   async remove(@Param('id', ParseIntPipe) id: number) {

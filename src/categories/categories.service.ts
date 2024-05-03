@@ -93,7 +93,6 @@ export class CategoriesService {
     return await this.categoryRepo.save(category);
   }
 
-  //not working
   async remove(id: number) {
     const categoryToDelete = await this.categoryRepo.findOneBy({
       id: id,

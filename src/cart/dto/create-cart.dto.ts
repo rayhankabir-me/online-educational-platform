@@ -13,9 +13,9 @@ export class CreateCartDto {
   @IsNotEmpty()
   price: number;
 
-  @IsString({ message: 'valid creator name is required' })
-  @IsNotEmpty()
-  created_by: string;
+  // @IsString({ message: 'valid creator name is required' })
+  // @IsNotEmpty()
+  // created_by: string;
 
   @IsNumber( {}, {message: 'valid category id is required'} )
   @IsNotEmpty()

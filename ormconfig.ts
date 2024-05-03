@@ -20,8 +20,8 @@ const config: PostgresConnectionOptions = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'postgres',
-  // password: 'mrittika',
+  // password: 'postgres',
+  password: 'mrittika',
   //password: 'admin',
   entities: [
     Course,
