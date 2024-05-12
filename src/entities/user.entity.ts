@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Course } from './course.entity';
 import { Order } from './order.entity';
+import { Cart } from './cart.entity';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
@@ -39,4 +40,9 @@ export class User {
     cascade: true,
   })
   orders: Order[];
+
+  @OneToMany(() => Cart, (cart) => cart.user, {
+    cascade: true,
+  })
+  carts: Cart[];
 }

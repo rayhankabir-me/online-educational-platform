@@ -3,7 +3,7 @@ import {BeforeInsert, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColu
 import { Exclude, Expose } from 'class-transformer';
 import { User } from './user.entity';
 
-@Entity('cart')
+@Entity('carts')
 export class Cart {
   @PrimaryGeneratedColumn()
   id: number;
@@ -28,7 +28,7 @@ export class Cart {
   // })
   // courses: Course[];
 
-  @ManyToOne(() => User, (user) => user.courses)
+  @ManyToOne(() => User, (user) => user.carts)
   @Exclude({ toPlainOnly: true })
   user: User;
 

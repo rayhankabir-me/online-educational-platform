@@ -8,6 +8,7 @@ import { Course } from 'src/entities/course.entity';
 import { Coursereview } from 'src/entities/coursereview.entity';
 import { Forum } from 'src/entities/forum.entity';
 import { Invoice } from 'src/entities/invoice.entity';
+import { LandingPage } from 'src/entities/landing-page.entity';
 import { Newcourse } from 'src/entities/newcourse.entity';
 import { Order } from 'src/entities/order.entity';
 import { User } from 'src/entities/user.entity';
@@ -37,6 +38,7 @@ const config: PostgresConnectionOptions = {
     Newcourse,
     Forum,
     Cart,
+    LandingPage
   ],
   synchronize: true,
 };
