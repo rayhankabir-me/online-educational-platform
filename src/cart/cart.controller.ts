@@ -25,6 +25,12 @@ export class CartController {
     return this.cartService.findAll();
   }
 
+  @Get('forMe')
+  @UseGuards(AuthGuard())
+  findAllForOneUser(@GetUser() user: User,) {
+    return this.cartService.findAllForOneUser(user);
+  }
+
   @Get(':course_id')
   async findOne(@Param('course_id') course_id: string) {
     return await this.cartService.findOne(+course_id);

@@ -9,6 +9,7 @@ import {
 import { Course } from './course.entity';
 import { Order } from './order.entity';
 import { Cart } from './cart.entity';
+import { Payment } from './payment.entity';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
@@ -45,4 +46,9 @@ export class User {
     cascade: true,
   })
   carts: Cart[];
+
+  @OneToMany(() => Payment, (payment) => payment.user, {
+    cascade: true,
+  })
+  payments: Payment[];
 }

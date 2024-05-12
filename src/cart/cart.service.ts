@@ -10,7 +10,9 @@ import { User } from 'src/entities/user.entity';
 export class CartService {
   constructor(
     @InjectRepository(Cart) 
-    private readonly cartRepo: Repository<Cart>,
+    private readonly cartRepo: Repository<Cart>, 
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
   //my
   // async create(createCartDto: CreateCartDto) {
@@ -32,6 +34,17 @@ export class CartService {
   async findAll() {
     const cart = await this.cartRepo.find({
       relations: ['user'],
+    });
+    if (!cart) {
+      throw new NotFoundException('Sorry, no item found');
+    }
+    return cart;
+  }
+
+  async findAllForOneUser(user: User) {
+    const cart = await this.cartRepo.find({
+      relations: ['user'],
+      where:{user:user}
     });
     if (!cart) {
       throw new NotFoundException('Sorry, no item found');
@@ -72,4 +85,6 @@ export class CartService {
     }
     await this.cartRepo.remove(courseToDelete);
   }
+
+
 }

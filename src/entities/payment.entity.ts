@@ -2,30 +2,33 @@ import {BeforeInsert, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColu
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import { User } from './user.entity';
-import { Payment } from './payment.entity';
+import { Cart } from './cart.entity';
 
-@Entity('carts')
-export class Cart {
+@Entity('payments')
+export class Payment {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @PrimaryGeneratedColumn()
+  transaction_id: number;
 
   @Column({ unique: true, nullable: false })
   course_id: number;
 
-  @Column({ nullable: true })
-  categoryId: number;
+  @Column({nullable: false})
+  course_name: string;
 
-  @Column({ nullable: true })
-  no_of_items: number;
-  
   @Column({ nullable: false })
   price: number;
 
-  @ManyToOne(() => Payment, (payment) => payment.carts, {
-  })
-  payment: Payment;
+  @Column({nullable: false})
+  payment_date: Date;
 
-  @ManyToOne(() => User, (user) => user.carts)
+  @OneToMany(() => Cart, (cart) => cart.payment, {cascade: true})
+  //@Exclude({ toPlainOnly: true })
+  carts: Cart[];
+
+  @ManyToOne(() => User, (user) => user.payments)
   @Exclude({ toPlainOnly: true })
   user: User;
 
