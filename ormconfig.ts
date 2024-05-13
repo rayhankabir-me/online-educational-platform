@@ -12,6 +12,7 @@ import { LandingPage } from 'src/entities/landing-page.entity';
 import { Newcourse } from 'src/entities/newcourse.entity';
 import { Order } from 'src/entities/order.entity';
 import { Payment } from 'src/entities/payment.entity';
+import { Quiz } from 'src/entities/quiz.entity';
 import { User } from 'src/entities/user.entity';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
@@ -22,9 +23,9 @@ const config: PostgresConnectionOptions = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'postgres',
+  //password: 'postgres',
   // password: 'mrittika',
-  //password: 'admin',
+  password: 'admin',
   entities: [
     Course,
     Category,
@@ -41,6 +42,7 @@ const config: PostgresConnectionOptions = {
     Cart,
     LandingPage,
     Payment,
+    Quiz
   ],
   synchronize: true,
 };
