@@ -6,8 +6,10 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Cart } from './cart.entity';
 import { Course } from './course.entity';
 import { Order } from './order.entity';
+import { Payment } from './payment.entity';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
@@ -39,4 +41,14 @@ export class User {
     cascade: true,
   })
   orders: Order[];
+
+  @OneToMany(() => Cart, (cart) => cart.user, {
+    cascade: true,
+  })
+  carts: Cart[];
+
+  @OneToMany(() => Payment, (payment) => payment.user, {
+    cascade: true,
+  })
+  payments: Payment[];
 }

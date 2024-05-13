@@ -8,8 +8,10 @@ import { Course } from 'src/entities/course.entity';
 import { Coursereview } from 'src/entities/coursereview.entity';
 import { Forum } from 'src/entities/forum.entity';
 import { Invoice } from 'src/entities/invoice.entity';
+import { LandingPage } from 'src/entities/landing-page.entity';
 import { Newcourse } from 'src/entities/newcourse.entity';
 import { Order } from 'src/entities/order.entity';
+import { Payment } from 'src/entities/payment.entity';
 import { User } from 'src/entities/user.entity';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
@@ -37,6 +39,8 @@ const config: PostgresConnectionOptions = {
     Newcourse,
     Forum,
     Cart,
+    LandingPage,
+    Payment,
   ],
   synchronize: true,
 };

@@ -4,19 +4,15 @@ import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/entities/user.entity';
+import { RolesGards } from 'src/auth/roles.guards';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('cart')
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
-  //my
-  // @Post('addToCart')
-  // async create(@Body(ValidationPipe) createCartDto: CreateCartDto) {
-  //   return this.cartService.create(createCartDto);    
-  // }
-
   @Post('addToCart')
-  //@UseGuards(AuthGuard())
+  @UseGuards(AuthGuard())
   async create(
     @Body() createCartDto: CreateCartDto,
     @GetUser() user: User,
@@ -24,10 +20,15 @@ export class CartController {
     return this.cartService.create(createCartDto, user);
   }
 
-
   @Get()
   findAll() {
     return this.cartService.findAll();
+  }
+
+  @Get('forMe')
+  @UseGuards(AuthGuard())
+  findAllForOneUser(@GetUser() user: User,) {
+    return this.cartService.findAllForOneUser(user);
   }
 
   @Get(':course_id')
