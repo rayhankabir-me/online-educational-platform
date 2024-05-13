@@ -32,15 +32,19 @@ export class CoursesController {
   ) {}
 
   @Get()
-  findAll() {
-    return this.coursesService.findAll();
+  findAll(@Query() terms: any) {
+    if (terms && (terms.term || terms.categoryId || terms.type)) {
+      return this.coursesService.searchCourses(terms);
+    } else {
+      return this.coursesService.findAll();
+    }
   }
 
-  //search courses
-  @Get('search')
-  searchCourse(@Query() terms: any) {
-    return this.coursesService.searchCourses(terms);
-  }
+  // //search courses
+  // @Get('search')
+  // searchCourse(@Query() terms: any) {
+  //   return this.coursesService.searchCourses(terms);
+  // }
 
   @Post('create')
   @UseGuards(AuthGuard(), RolesGards)
