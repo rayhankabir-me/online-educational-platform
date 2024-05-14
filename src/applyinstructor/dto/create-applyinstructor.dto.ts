@@ -9,7 +9,7 @@ export class CreateApplyinstructorDto {
   name: string;
 
   @IsEmail()
-  email: string;
+  email:  string;
 
 
 } 

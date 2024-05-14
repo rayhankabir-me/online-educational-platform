@@ -42,9 +42,13 @@ export class ApplyinstructorService {
     return `This action returns a #${id} applyinstructor`;
   }
 
-
- 
-  remove(id: number) {
-    return `This action removes a #${id} applyinstructor`;
+  async remove(id: number) {
+    const review = await this.applyinstructorRepo.findOne({ where: { id: id } });
+    if (!review) {
+      throw new Error('Course review not found');
+    }
+    return this.applyinstructorRepo.delete(id);
   }
+ 
+ 
 }
