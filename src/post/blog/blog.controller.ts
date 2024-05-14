@@ -24,10 +24,10 @@ export class BlogController {
     return allPosts;
   }
 
-  @Get(':user_id')
+  @Get(':user_name')
   @UseGuards(AdminGuard)
-  findOne(@Param('user_id') user_id: string) {
-    return this.blogService.findOne(+user_id);
+  findOne(@Param('user_name') user_name: string) {
+    return this.blogService.findOne(user_name);
   }
 
   

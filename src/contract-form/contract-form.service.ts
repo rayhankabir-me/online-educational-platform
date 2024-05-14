@@ -20,8 +20,8 @@ export class ContractFormService {
     return await this.ContractFormRepo.find({});
   }
 
-  async findOne(id: number) {
-    return await this.ContractFormRepo.find({ where: { id: id } });
+  async findOne(name: string) {
+    return await this.ContractFormRepo.find({ where: { name: name } });
   }
 
   async update(id: number, UpdateContractFormDto: UpdateContractFormDto) {

@@ -24,9 +24,9 @@ export class ContractFormController {
 
   
 
-  @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.contractFormService.findOne(+id);
+  @Get(':name')
+  findOne(@Param('name') name: string) {
+    return this.contractFormService.findOne(name);
   }
   
   @Patch(':id')

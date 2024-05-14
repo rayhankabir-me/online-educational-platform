@@ -24,8 +24,8 @@ export class BlogService {
 
   
 
-  async findOne(id: number) {
-    return await this.BlogRepo.find({ where: { user_id: id } });
+  async findOne(user_name: string) {
+    return await this.BlogRepo.find({ where: { user_name:user_name} });
   }
 
   async update(id: number, updateBlogDto: UpdateBlogDto) {
