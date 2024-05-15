@@ -16,7 +16,7 @@ export class ApplyinstructorController {
 
   @Post('create')
   
-  create(@Body() createApplyinstructorDto: any) {
+  create(@Body() createApplyinstructorDto: CreateApplyinstructorDto) {
     return this.applyinstructorService.create(createApplyinstructorDto);
   }
 
@@ -44,13 +44,13 @@ export class ApplyinstructorController {
     return { message: "File Upload", file: file.filename };
   }
   @Get('Admin/all')
-  // @UseGuards(AuthGuard(), AdminGuard)
+  @UseGuards(AuthGuard(), AdminGuard)
   ApplyInstructor() { 
   return this.applyinstructorService.ApplyInstructor();
   } 
   
   @Patch('Admin/applyinstructor/:id')
-  // @UseGuards(AuthGuard(), AdminGuard)
+   @UseGuards(AuthGuard(), AdminGuard)
   approveApplyInstructor(@Param('id') id: number) { 
   return this.applyinstructorService.approveApplyInstructor(id);
   }

@@ -23,7 +23,7 @@ export class CoursereviewController {
   }
 
   @Get('Admin/coursereview/all')
-  @UseGuards(AuthGuard(), RolesGards)
+
   Coursereview() { 
   return this.coursereviewService.Coursereview();
   } 
@@ -43,8 +43,8 @@ export class CoursereviewController {
   return { message: 'Review updated successfully' };
 }
 
-@Delete('Admin/coursereview/:id')
-@UseGuards(AuthGuard(), AdminGuard)
+@Delete('Admin/:id')
+//@UseGuards(AuthGuard(), AdminGuard)
 removecoursereview(@Param('id') id: string) {
   return this.coursereviewService.removecoursereview(+id);
 }
