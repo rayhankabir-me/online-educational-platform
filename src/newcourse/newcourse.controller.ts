@@ -27,8 +27,8 @@ export class NewcourseController {
     return this.newcourseService.findOne(+id);
   }
 
-  @Get('Admin/newcourse/all')
-  @UseGuards(AuthGuard(), RolesGards)
+  @Get('admin/all')
+  @UseGuards(AuthGuard(), AdminGuard)
   Newcourse() { 
   return this.newcourseService.Newcourse();
   }
@@ -37,7 +37,7 @@ export class NewcourseController {
   update(@Param('id') id: string, @Body() updateNewcourseDto: UpdateNewcourseDto) {
     return this.newcourseService.update(+id, updateNewcourseDto);
   }
-@Patch('Admin/newcourse/:id')
+@Patch('Admin/:id')
 @UseGuards(AuthGuard(), AdminGuard)
   approveNewcourse(@Param('id') id: number) { 
   return this.newcourseService.approveNewcourse(id);
@@ -46,8 +46,8 @@ export class NewcourseController {
   remove(@Param('id') id: string) {
     return this.newcourseService.remove(+id);
   }
-  @Delete('Instructor/newcourse/:id')
-  @UseGuards(AuthGuard(), InstructorGuard) 
+  @Delete('Admin/newcourse/:id')
+  @UseGuards(AuthGuard(), AdminGuard)
   removenewcourse(@Param('id') id: string) {
     return this.newcourseService.removenewcourse(+id);
   }
