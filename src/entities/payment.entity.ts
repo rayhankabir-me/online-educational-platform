@@ -14,8 +14,8 @@ export class Payment {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @PrimaryGeneratedColumn()
-  transaction_id: number;
+  // @PrimaryGeneratedColumn()
+  // transaction_id: number;
 
   @Column({ unique: true, nullable: false })
   course_id: number;
@@ -26,8 +26,8 @@ export class Payment {
   @Column({ nullable: false })
   price: number;
 
-  @Column({ nullable: false })
-  payment_date: Date;
+  // @Column({ nullable: false })
+  // payment_date: Date;
 
   @OneToMany(() => Cart, (cart) => cart.payment, { cascade: true })
   //@Exclude({ toPlainOnly: true })
