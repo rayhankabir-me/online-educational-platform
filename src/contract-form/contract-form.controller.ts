@@ -4,6 +4,7 @@ import { CreateContractFormDto } from './dto/create-contract-form.dto';
 import { UpdateContractFormDto } from './dto/update-contract-form.dto';
 import { RolesGards } from 'src/auth/roles.guards';
 import { AdminGuard } from 'src/auth/admin.guards';
+import { AuthGuard } from '@nestjs/passport';
 
 
 @Controller('contract-form')
@@ -17,7 +18,7 @@ export class ContractFormController {
   }
 
   @Get('')
-  @UseGuards(RolesGards)
+  @UseGuards(AuthGuard(),AdminGuard)
   findAll() {
     return this.contractFormService.findAll();
   }
@@ -25,12 +26,13 @@ export class ContractFormController {
   
 
   @Get(':name')
+  @UseGuards(AuthGuard(),AdminGuard)
   findOne(@Param('name') name: string) {
     return this.contractFormService.findOne(name);
   }
   
   @Patch(':id')
-  
+  @UseGuards(AuthGuard(),AdminGuard)
   async update(@Param('id') id: number, @Body() updateContractFormDto: UpdateContractFormDto) {
     const updatedContract = await this.contractFormService.update(+id, updateContractFormDto);
     if (updatedContract) {
@@ -40,7 +42,7 @@ export class ContractFormController {
     }
   }
   @Delete(':id')
-  @UseGuards(AdminGuard)
+  @UseGuards(AuthGuard(),AdminGuard)
   remove(@Param('id') id: number) {
     return this.contractFormService.remove(+id);
   }

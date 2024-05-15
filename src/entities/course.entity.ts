@@ -29,10 +29,9 @@ export class Course {
   @Column()
   updated_at: Date;
 
-  @ManyToOne(
-    () => Category,
-    (category) => category.courses /*{ onDelete: 'CASCADE' }*/,
-  )
+  @ManyToOne(() => Category, (category) => category.courses, {
+    onDelete: 'CASCADE',
+  })
   category: Category;
 
   //joining for book store
