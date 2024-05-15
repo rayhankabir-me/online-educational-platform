@@ -1,4 +1,4 @@
-import { IsDateString, IsInt, IsNotEmpty, IsString } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsString } from 'class-validator';
 
 export class UpdateCourseDto {
   @IsNotEmpty({ message: 'You must provide course tilte' })
@@ -17,7 +17,6 @@ export class UpdateCourseDto {
   @IsString()
   price: string;
 
-  @IsInt()
   rating: number;
 
   @IsDateString()

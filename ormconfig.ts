@@ -23,8 +23,8 @@ const config: PostgresConnectionOptions = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  //password: 'postgres',
-  password: 'mrittika',
+  password: 'postgres',
+  //password: 'mrittika',
   //password: 'admin',
   entities: [
     Course,
@@ -42,7 +42,7 @@ const config: PostgresConnectionOptions = {
     Cart,
     LandingPage,
     Payment,
-    Quiz
+    Quiz,
   ],
   synchronize: true,
 };

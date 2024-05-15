@@ -30,7 +30,7 @@ export class CategoriesController {
   // }
 
   @Post('create')
-  //@UseGuards(AuthGuard(), RolesGards)
+  @UseGuards(AuthGuard(), RolesGards)
   async create(
     @Body() createCategoryDto: CreateCategoryDto,
     @GetUser() user: User,
@@ -50,7 +50,7 @@ export class CategoriesController {
 
   //update category his his whose whose
   @Patch(':id')
-  //@UseGuards(AuthGuard(), RolesGards)
+  @UseGuards(AuthGuard(), RolesGards)
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body(ValidationPipe) updateCategoryDto: UpdateCategoryDto,
