@@ -79,7 +79,7 @@ export class BookStoreController {
   }
 
   @Delete('delete/:id')
-  @UseGuards(AuthGuard(), AdminGuard)
+  //@UseGuards(AuthGuard(), AdminGuard)
   async remove(@Param('id', ParseIntPipe) id: number) {
     await this.bookStoreService.remove(id);
     return { message: 'The item has been deleted successfully' };

@@ -12,10 +12,10 @@ export class LandingPageService {
   ) {}
 
   async create(createLandingPageDto: CreateLandingPageDto) {
-    const { banner_title, banner_description, banner_image, button_text, button_url } = createLandingPageDto;
+    const { title, description, banner_image, button_text, button_url } = createLandingPageDto;
 
-    const bannerTitleExists = await this.landingRepo.findOne({where: {banner_title: banner_title, id: 1}});
-    const bannerDescExists = await this.landingRepo.findOne({where: {banner_description: banner_description, id: 1}});
+    const bannerTitleExists = await this.landingRepo.findOne({where: {title: title, id: 1}});
+    const bannerDescExists = await this.landingRepo.findOne({where: {description: description, id: 1}});
     const bannerImageExists = await this.landingRepo.findOne({where: {banner_image: banner_image, id: 1}});
     const buttonTextExists = await this.landingRepo.findOne({where: {button_text: button_text, id: 1}});
     const buttonUrlExists = await this.landingRepo.findOne({where: {button_url: button_url, id: 1}});

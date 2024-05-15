@@ -3,11 +3,11 @@ import { IsNotEmpty, IsString } from "class-validator";
 export class CreateLandingPageDto {
     @IsNotEmpty()
     @IsString()
-    banner_title: string;
+    title: string;
 
     @IsNotEmpty()
     @IsString()
-    banner_description: string;
+    description: string;
 
     @IsNotEmpty()
     @IsString()

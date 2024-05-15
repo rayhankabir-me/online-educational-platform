@@ -17,8 +17,8 @@ export class BookStore {
   //   })
   //   courses: Course[];
 
-//   @Column({ nullable: false })
-//   description: string;
+  @Column({ nullable: false })
+  description: string;
 
   @Column({ nullable: false })
   category: string;

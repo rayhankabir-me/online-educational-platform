@@ -6,10 +6,10 @@ export class LandingPage {
   id: number;
 
   @Column()
-  banner_title: string;
+  title: string;
 
   @Column()
-  banner_description: string;
+  description: string;
 
   @Column()
   button_text: string;
