@@ -71,4 +71,42 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
-# online-educational-platform
+# Online Educational Platform Backend API using NestJs
+## User Can Register
+![user can register](https://github.com/rayhankabir-me/online-educational-platform/assets/83497499/c6abe303-9c71-4953-a49d-516b7c1429d8)
+## User Already Exists
+![use already exists](https://github.com/rayhankabir-me/online-educational-platform/assets/83497499/c2202c8d-bd42-4066-9519-4676ac4cb3c2)
+## Try to Login - Invalid Login Credentails
+![invalid login credentials](https://github.com/rayhankabir-me/online-educational-platform/assets/83497499/7baa9dce-deae-48f8-ade8-153ce4b1898e)
+## User Login and Generate Access Token
+![user can login and get access token](https://github.com/rayhankabir-me/online-educational-platform/assets/83497499/886af917-db2f-4eaf-9360-ac8524924ff8)
+## View Profile - Request with Expired Token
+![request with expired token](https://github.com/rayhankabir-me/online-educational-platform/assets/83497499/9976cb3b-01f8-4704-b3db-3214bd5eaff2)
+## View Profile - Request with Valid Token
+![request with valid token](https://github.com/rayhankabir-me/online-educational-platform/assets/83497499/810c580f-d519-4fc8-9341-a9c88b264d31)
+## Admin and Instructor can create Course
+![admin and instructor can create course](https://github.com/rayhankabir-me/online-educational-platform/assets/83497499/db50fa5d-43d4-4199-ac0a-a1d78fe8608e)
+## Get all courses data
+![get all courses result](https://github.com/rayhankabir-me/online-educational-platform/assets/83497499/9fea8585-d91f-483e-a76a-f66b8ab4466d)
+## Single Course Data
+![single course details page](https://github.com/rayhankabir-me/online-educational-platform/assets/83497499/1d7c2501-9ebd-4fe6-808c-e8edbac0eb2c)
+## Try to Place Order with Invalid Token
+![try to order with expired token](https://github.com/rayhankabir-me/online-educational-platform/assets/83497499/2d608d5a-ccd7-400a-b652-16674be4feab)
+## Order Created Successfully with valid token
+![orde created successfully with valid token](https://github.com/rayhankabir-me/online-educational-platform/assets/83497499/b55c9263-502b-4660-ae56-6fdc12651b0e)
+## See Order History
+![ses order history with token](https://github.com/rayhankabir-me/online-educational-platform/assets/83497499/b28305cf-95ae-448b-96ac-d6e30efa4cb3)
+## See Order Details
+![order details with token](https://github.com/rayhankabir-me/online-educational-platform/assets/83497499/81743de5-6a1a-4acd-875f-e0e3bada5a83)
+
+
+
+
+
+
+
+
+
+
+
+
